@@ -15,10 +15,11 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-      // Return ProductResource::collection(Product::all());
-      // return new ProductCollection(Product::all());
-      return ProductCollection::collection(Product::all());
+    {    //Return Product::all(); //all products
+      // Return ProductResource::collection(Product::all()); //use style of ProductResource
+      // return new ProductCollection(Product::all()); //only one set
+      //return ProductCollection::collection(Product::all()); all of ProductCollection style
+      return ProductCollection::collection(Product::paginate(20)); // add pagination for 5 shows
     }
 
     /**
