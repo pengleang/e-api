@@ -20,4 +20,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+Route::get('generate-pdf','PDFController@generatePDF');
+Route::get('qr-code-g', function () {
+    \QrCode::size(500)
+            ->format('png')
+            ->generate('sabaytraining.com', public_path('images/qrcode.png'));
+
+  return view('qrCode');
+
+});
 
