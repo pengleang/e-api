@@ -15,7 +15,17 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('detail');
+            $table->string('sponsor');
+            $table->integer('price');
+            $table->integer('duration');
+            $table->date('start');
+            $table->date('finish');
             $table->timestamps();
+            $table->engine = 'MyISAM';
+            // $table->charset= 'utf8';
+            // $table->collation = 'utf8_unicode_ci';
         });
     }
 

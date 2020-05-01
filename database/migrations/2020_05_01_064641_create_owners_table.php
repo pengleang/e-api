@@ -15,7 +15,18 @@ class CreateOwnersTable extends Migration
     {
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects')->OnDelete('cascade');
+            $table->string('name');
+            $table->string('position');
+            $table->string('department');
+            $table->string('phone');
+            $table->string('supervisor');
+            $table->text('review');
             $table->timestamps();
+            $table->engine = 'MyISAM';
+            // $table->charset= 'utf8';
+            // $table->collation = 'utf8_unicode_ci';
         });
     }
 
