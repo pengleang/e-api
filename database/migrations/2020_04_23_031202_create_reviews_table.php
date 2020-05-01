@@ -21,6 +21,9 @@ class CreateReviewsTable extends Migration
             $table->text('review');
             $table->integer('star');
             $table->timestamps();
+            $table->engine = 'MyISAM';
+            // $table->charset= 'utf8';
+            // $table->collation = 'utf8_unicode_ci';
         });
     }
 

@@ -21,6 +21,9 @@ class CreateProductsTable extends Migration
             $table->integer('stock');
             $table->integer('discount');
             $table->timestamps();
+            $table->engine = 'MyISAM';
+            // $table->charset= 'utf8';
+            // $table->collation = 'utf8_unicode_ci';
         });
     }
 
