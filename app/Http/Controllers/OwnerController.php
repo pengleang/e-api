@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OwnerResource;
 use App\Model\Owner;
+use App\Model\Project;
 use Illuminate\Http\Request;
 
 class OwnerController extends Controller
@@ -12,9 +14,11 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project)
     {
-        //
+       //return Owner::all();
+      // return $project->owners;//relationship
+       return OwnerResource::collection($project->owners);
     }
 
     /**
