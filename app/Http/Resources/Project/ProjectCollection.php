@@ -14,6 +14,17 @@ class ProjectCollection extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        //return parent::toArray($request);
+       return[
+            'name'=>$this->name,
+            'description'=>$this->detail,
+            'sponsor'=>$this->sponsor,
+            'price'=>$this->price,
+            'duration'=>$this->duration,
+            'start'=>$this->start,
+            'finish'=>$this->finish,
+            'href'=>[
+                'link'=>route('projects.show',$this->id)]
+            ];
     }
 }
