@@ -23,6 +23,7 @@ class ProjectResource extends JsonResource
             'duration'=>$this->duration,
             'start'=>$this->start,
             'finish'=>$this->finish,
+            'href'=>['owners'=>route('owners.index',$this->id)]
         ];
     }
 }
