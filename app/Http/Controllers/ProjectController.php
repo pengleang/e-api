@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Project\ProjectResource;
 use App\Model\Project;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class ProjectController extends Controller
 {
@@ -14,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        Return Project::all();
     }
 
     /**
@@ -45,8 +47,8 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
-    {
-        //
+    {   //return $project;
+        return new ProjectResource($project);
     }
 
     /**
