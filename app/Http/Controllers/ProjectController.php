@@ -6,10 +6,16 @@ use App\Http\Resources\Project\ProjectCollection;
 use App\Http\Resources\Project\ProjectResource;
 use App\Model\Project;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProjectRequest;
+use Symfony\Component\HttpFoundation\Response;
 use PhpParser\Node\Stmt\Return_;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index','show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,9 +43,22 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        //
+        //return "Hello Store Project!!";
+        //return $request->all();
+        $project = new Project;
+        $project->name = $request->name;
+        $project->detail = $request->detail;
+        $project->sponsor = $request->sponsor;
+        $project->price = $request->price;
+        $project->duration = $request->duration;
+        $project->start = $request->start;
+        $project->finish = $request->finish;
+        $project->save();
+        return response([
+            'data' => new ProjectResource($project)
+        ],Response::HTTP_CREATED); //201
     }
 
     /**
