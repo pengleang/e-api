@@ -92,7 +92,15 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        //return $request->all();
+        //return $product;
+        /**$request['detail'] =$request->description;
+        unset($request['description']);
+        */
+        $project->update($request->all());
+        return response([
+            'data'=> new ProjectResource($project)
+        ],Response::HTTP_CREATED); //],201);
     }
 
     /**
@@ -103,6 +111,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+       //return $product; //test to show the result in this function
+       $project->delete();
+       return response(null,Response::HTTP_NO_CONTENT); //],204);
     }
 }
