@@ -10,7 +10,8 @@ $factory->define(Project::class, function (Faker $faker) {
         /**$table->string('name');$table->text('detail');
             $table->string('sponsor');$table->integer('price');
             $table->integer('duration');$table->date('start');
-            $table->date('finish');*/
+            $table->date('finish');
+            $table->integer('user_id');*/
                 'name'=>$faker->name,
                 'detail'=>$faker->paragraph,
                 'sponsor'=>$faker->company,
@@ -19,5 +20,8 @@ $factory->define(Project::class, function (Faker $faker) {
                 'start'=>$faker->dateTime( $max ='now', $timezone = 'Europe/Paris'),
                 'finish'=>$faker->dateTimeBetween($startDate = 'now',
                 $endDate = '5 years', $timezone = 'Europe/Paris'),
+                'user_id'=>function(){
+                    return App\User::all()->random();
+                },
     ];
 });

@@ -22,6 +22,7 @@ class CreateProjectsTable extends Migration
             $table->integer('duration');
             $table->date('start');
             $table->date('finish');
+            $table->integer('user_id')->unsigned()->index();
             $table->timestamps();
             $table->engine = 'MyISAM';
             // $table->charset= 'utf8';

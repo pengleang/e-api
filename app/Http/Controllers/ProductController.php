@@ -6,7 +6,10 @@ use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Auth;
+//use Auth;
 use Symfony\Component\HttpFoundation\Response;
+use app\Exceptions\ProductNotBelongsToUser;
 class ProductController extends Controller
 {
     public function __construct()
@@ -19,7 +22,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    //Return Product::all(); //all products
+    {
       // Return ProductResource::collection(Product::all()); //use style of ProductResource
       // return new ProductCollection(Product::all()); //only one set
       //return ProductCollection::collection(Product::all()); all of ProductCollection style
@@ -91,6 +94,7 @@ class ProductController extends Controller
     {
         //return $request->all();
         //return $product;
+        $this->ProductUserCheck($product);
         $request['detail'] =$request->description;
         unset($request['description']);
         $product->update($request->all());
@@ -107,8 +111,14 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     { //return $product; //test to show the result in this function
+       $this->ProductUserCheck($product);
        $product->delete();
        $product->reviews()->delete();
         return response(null,Response::HTTP_NO_CONTENT); //],204);
+    }
+    public function ProductUserCheck($product){
+        if(Auth::id()!==$product->user_id){
+            throw new ProductNotBelongsToUser;
+        }
     }
 }
