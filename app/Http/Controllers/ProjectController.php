@@ -111,8 +111,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-       //return $product; //test to show the result in this function
-       $project->delete();
-       return response(null,Response::HTTP_NO_CONTENT); //],204);
+      // return $project; //test to show the result in this function
+      $project->delete();
+      $project->owners()->delete();
+      //return redirect('welcome'->with('success', 'project record deleted'));
+       return response(null,Response::HTTP_NO_CONTENT); //],204);*/
     }
 }

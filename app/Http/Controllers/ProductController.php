@@ -107,7 +107,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     { //return $product; //test to show the result in this function
-        $product->delete();
+       $product->delete();
+       $product->reviews()->delete();
         return response(null,Response::HTTP_NO_CONTENT); //],204);
     }
 }

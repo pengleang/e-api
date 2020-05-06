@@ -16,7 +16,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->OnDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->OnDelete('cascade')->onUpdate('cascade');
             $table->string('customer');
             $table->text('review');
             $table->integer('star');
